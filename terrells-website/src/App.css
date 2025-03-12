@@ -45,12 +45,23 @@
   display: flex;
 }
 
-.beginner {
-    margin: 10px;
-    display: flex;
-    background-color: black;
-    width: 300px;
-    height: 300px;
-    justify-content: center;
-    align-items: center;
+/* Terrell's Website Main Styling */
+.music-column-container {
+  display: flex;
+}
+
+.music-block-container {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.music-block {
+  margin: 10px;
+  display: flex;
+  background-color: black;
+  width: 300px;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
 }
