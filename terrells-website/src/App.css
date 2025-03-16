@@ -46,8 +46,13 @@
 }
 
 /* Terrell's Website Main Styling */
+.site-title {
+  color: black;
+}
+
 .music-display {
   display: flex;
+  justify-content: center;
 }
 
 .music-block-container {

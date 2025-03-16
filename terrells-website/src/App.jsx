@@ -5,7 +5,8 @@ import "./App.css";
 function App() {
   return (
     <>
-      <h1>TrellSettaz Beats</h1>
+      <img src="src/assets/TrellsSettaz-logo.jpeg"></img>
+      <h1 className="site-title">TrellSettaz Beats</h1>
       <div className="music-display">
         <MusicBlock audioSrc="/wavs/Awake.mp3" />
         <MusicBlock audioSrc="/wavs/Track2.mp3" />
