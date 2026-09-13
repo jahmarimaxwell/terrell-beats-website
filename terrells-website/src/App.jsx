@@ -1,19 +1,26 @@
-import { useState } from "react";
-import MusicBlock from './components/MusicBlock';
+import React from "react";
+import { Routes, Route, HashRouter } from 'react-router-dom';
+import MusicBlock from './components/music/MusicBlock';
 import "./App.css";
+{/* importing mainPage */}
+import Header from './components/header/Header';
+import MainPage from './components/pages/MainPage';
+// import './index.css'
+import './App.css'
+
 
 function App() {
+
   return (
     <>
-      <img src="src/assets/TrellsSettaz-logo.jpeg"></img>
-      <h1 className="site-title">TrellSettaz Beats</h1>
-      <div className="music-display">
-        <MusicBlock audioSrc="/wavs/Awake.mp3" />
-        <MusicBlock audioSrc="/wavs/Track2.mp3" />
-        <MusicBlock audioSrc="/wavs/Track3.mp3" />
-      </div>
+      <HashRouter> {/* So that the homepage is "MainPage" */}
+        <Header />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+        </Routes>
+      </HashRouter>
     </>
-  );
+  )
 }
 
 export default App;
