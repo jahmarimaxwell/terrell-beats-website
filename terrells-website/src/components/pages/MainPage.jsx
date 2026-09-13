@@ -4,7 +4,7 @@ import MusicBlock from "../music/MusicBlock";
 export default function mainPage() {
     return (
     <>
-      <img src="src/assets/TrellsSettaz-logo.jpeg"></img>
+      <img className="cover" src="src/assets/TrellsSettaz-logo.jpeg"></img>
 
       <div className="information-container">
         <h1 className="info-title">Why Choose TrendSettaz?</h1>

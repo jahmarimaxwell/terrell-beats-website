@@ -161,7 +161,7 @@ body {
   background-color: #282D48;
   /* background-color: white; */
   /* Centers NavBar */
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   padding: 0px 100px 0px 100px;
   display: flex;
   justify-content: space-between;
@@ -215,6 +215,10 @@ a:hover {
   color: white;
 }
 
+.cover {
+  width: 100%;
+}
+
 .information-container {
   display: flex;
   flex-direction: column;
@@ -259,7 +263,7 @@ a:hover {
 
 .music-display {
   width: 100%;
-  margin: 30px;
+  margin: 0px;
   display: flex;
   justify-content: center;
 }
@@ -274,7 +278,7 @@ a:hover {
   background-color: black;
   width: 350px;
   height: 300px;
-  margin: 10px;
+  margin: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
