@@ -4,7 +4,7 @@ import MusicBlock from "../music/MusicBlock";
 export default function mainPage() {
     return (
     <>
-      <img className="cover" src="src/assets/TrellsSettaz-logo.jpeg"></img>
+      <img className="cover" src="src/assets/TrellSettaz-logo.png"></img>
 
       <div className="information-container">
         <h1 className="info-title">Why Choose TrendSettaz?</h1>
@@ -39,8 +39,11 @@ export default function mainPage() {
       
       <div className="music-display">
         <MusicBlock audioSrc="/wavs/Awake.mp3" />
+         <hr></hr>
         <MusicBlock audioSrc="/wavs/Track2.mp3" />
+         <hr></hr>
         <MusicBlock audioSrc="/wavs/Track3.mp3" />
+         <hr></hr>
       </div>
     </>
   );
