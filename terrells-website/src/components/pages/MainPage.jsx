@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import beats from "../../beats";
 import MusicBlock from "../music/MusicBlock";
 
 export default function mainPage() {
@@ -38,12 +39,14 @@ export default function mainPage() {
       </div>
       
       <div className="music-display">
-        <MusicBlock audioSrc="/wavs/Awake.mp3" />
-         <hr></hr>
-        <MusicBlock audioSrc="/wavs/Track2.mp3" />
-         <hr></hr>
-        <MusicBlock audioSrc="/wavs/Track3.mp3" />
-         <hr></hr>
+        <div className="music-display">
+            {beats.map((beat) => (
+              <MusicBlock
+                key={beat.title}
+                beat={beat}
+              />
+            ))}
+        </div>
       </div>
     </>
   );
