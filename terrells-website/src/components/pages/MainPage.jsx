@@ -39,7 +39,6 @@ export default function mainPage() {
       </div>
       
       <div className="music-display">
-        <div className="music-display">
             {beats.map((beat) => (
               <MusicBlock
                 key={beat.title}
@@ -47,7 +46,6 @@ export default function mainPage() {
               />
             ))}
         </div>
-      </div>
     </>
   );
 }

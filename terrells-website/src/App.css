@@ -274,6 +274,7 @@ a:hover {
 .music-display {
   width: 100%;
   margin: 0px;
+  /* display: grid; */
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -376,22 +377,23 @@ hr {
   width: 900px;
 }
 
-.beat-row {
+.music-view {
   display: grid;
 
   grid-template-columns:
-    50px
-    minmax(200px, 1fr)
+    80px
+    minmax(180px, 1fr)
     80px
     70px
     minmax(180px, 1fr)
+    160px
     180px;
 
   align-items: center;
-
+  align-content: center;
   gap: 20px;
 
-  padding: 10px 0;
+  padding: 20px 100px;
 
   border-bottom: 1px solid #222;
 }

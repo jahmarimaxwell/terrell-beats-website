@@ -6,7 +6,7 @@ const beats = [
     tags: ["#hiphop", "#trap"],
     price: "$29.95",
     image: "/pictures/beat1.jpg",
-    audio: "/audio/beat1.mp3"
+    audio: "/wavs/Awake.mp3"
   },
 
   {
