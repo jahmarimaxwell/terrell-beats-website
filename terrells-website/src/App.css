@@ -271,25 +271,14 @@ a:hover {
 }
 
 /* //////// Music Section //////// */
+
 .music-display {
   width: 100%;
-  margin: 0px;
-  /* display: grid; */
+  margin: 20px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-}
-
-#music-palette-form {
-  width: 100%;
-  height: 100px;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  justify-content: center;
 }
 
 .music-block-container {
@@ -307,10 +296,26 @@ a:hover {
   width: 100%;
   height: 100px;
   margin: 10px;
-  display: flex;
-  flex-direction: row;
+
+  /* Use grid to define structure */
+  display: grid;
+
+/* Defines the width of the content within tables */
+  grid-template-columns:
+    80px
+    minmax(180px, 1fr)
+    80px
+    70px
+    minmax(180px, 1fr)
+    180px;
+
   align-items: center;
-  justify-content: space-around;
+  align-content: center;
+  gap: 20px;
+
+  padding: 20px 100px;
+
+  border-bottom: 1px solid #222;
 }
 
 .album-icon {
@@ -375,25 +380,4 @@ hr {
   border-top: 1px solid gray;
   margin: 20px 0;
   width: 900px;
-}
-
-.music-view {
-  display: grid;
-
-  grid-template-columns:
-    80px
-    minmax(180px, 1fr)
-    80px
-    70px
-    minmax(180px, 1fr)
-    160px
-    180px;
-
-  align-items: center;
-  align-content: center;
-  gap: 20px;
-
-  padding: 20px 100px;
-
-  border-bottom: 1px solid #222;
 }

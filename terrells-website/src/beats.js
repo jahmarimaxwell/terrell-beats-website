@@ -5,7 +5,7 @@ const beats = [
     bpm: 100,
     tags: ["#hiphop", "#trap"],
     price: "$29.95",
-    image: "/pictures/beat1.jpg",
+    image: "/assets/coverN.png",
     audio: "/wavs/Awake.mp3"
   },
 
@@ -15,7 +15,7 @@ const beats = [
     bpm: 120,
     tags: ["#future", "#typebeat"],
     price: "$29.95",
-    image: "/pictures/beat2.jpg",
+    image: "/assets/react.svg",
     audio: "/audio/beat2.mp3"
   },
 

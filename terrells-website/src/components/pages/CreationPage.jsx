@@ -1,5 +1,5 @@
 import beats from "../../beats.js";
-import MusicBlock from "../music/MusicBlock";
+import MusicBlock from "../music/MusicBlock.jsx";
 
 export default function MusicPage() {
   return (

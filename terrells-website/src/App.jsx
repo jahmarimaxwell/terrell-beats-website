@@ -7,7 +7,7 @@ import Header from './components/header/Header';
 import MainPage from './components/pages/MainPage';
 // import './index.css'
 import './App.css'
-import MusicPage from "./components/pages/MusicPage";
+import CreationPage from "./components/pages/CreationPage";
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/musicBlock" element={<MusicPage />} />
+          <Route path="/creationPage" element={<CreationPage />} />
         </Routes>
       </HashRouter>
     </>

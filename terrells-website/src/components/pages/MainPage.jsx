@@ -5,7 +5,7 @@ import MusicBlock from "../music/MusicBlock";
 export default function mainPage() {
     return (
     <>
-      <img className="cover" src="src/assets/TrellSettaz-logo.png"></img>
+      <img className="cover" src="assets/TrellSettaz.png"></img>
 
       <div className="information-container">
         <h1 className="info-title">Why Choose TrendSettaz?</h1>
@@ -39,12 +39,14 @@ export default function mainPage() {
       </div>
       
       <div className="music-display">
+          {/* <hr></hr> */}
             {beats.map((beat) => (
               <MusicBlock
                 key={beat.title}
                 beat={beat}
               />
             ))}
+          {/* <hr></hr> */}
         </div>
     </>
   );

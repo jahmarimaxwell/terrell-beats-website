@@ -17,11 +17,10 @@ export default function MusicBlock({ beat }) {
   return (
     <div className="music-block-container">
       <div className="music-view">
-
+        
         <img
           className="album-icon"
           src={beat.image}
-          alt={beat.title}
         />
 
         <div className="beat-title">
@@ -36,11 +35,11 @@ export default function MusicBlock({ beat }) {
           {beat.bpm}
         </div>
 
-        <div className="beat-tags">
+        {/* <div className="beat-tags">
           {beat.tags.map((tag) => (
             <span key={tag}>{tag}</span>
           ))}
-        </div>
+        </div> */}
 
         <div className="beat-actions">
           <button type="button">↓</button>
