@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
 import beats from "../../beats";
 import MusicBlock from "../music/MusicBlock";
+import MusicHeader from "../header/MusicHeader";
 
 export default function mainPage() {
     return (
@@ -37,17 +37,16 @@ export default function mainPage() {
             and grow your music business with detailed analytics.</p>
         </div>
       </div>
-      
+
+      <MusicHeader></MusicHeader>
       <div className="music-display">
-          {/* <hr></hr> */}
             {beats.map((beat) => (
               <MusicBlock
                 key={beat.title}
                 beat={beat}
               />
             ))}
-          {/* <hr></hr> */}
-        </div>
+      </div>
     </>
   );
 }
