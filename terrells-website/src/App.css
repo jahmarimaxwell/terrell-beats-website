@@ -190,7 +190,9 @@ body {
 
 .sideBar {
   display: flex;
-  width: 1000px;
+  width: 900px;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .music-creation {
@@ -396,4 +398,29 @@ hr {
   border-top: 1px solid gray;
   margin: 20px 0;
   width: 900px;
+}
+
+/* /////// Creation Page /////// */
+.creation-container {
+  /* Make height same as screen size */
+  height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  flex-direction: column;
+}
+
+.add-beat-form {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.property {
+  font-size: 15px;
+  margin: 20px;
+  padding: 20px;
+  height: 40px;
+  border-radius: 20px;
 }

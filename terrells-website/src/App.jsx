@@ -1,6 +1,5 @@
 import React from "react";
 import { Routes, Route, HashRouter } from 'react-router-dom';
-import MusicBlock from './components/music/MusicBlock';
 import "./App.css";
 {/* importing mainPage */}
 import Header from './components/header/Header';
