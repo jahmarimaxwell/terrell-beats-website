@@ -1,8 +1,7 @@
 export default function MusicHeader() {
   return (
     <div className="music-header">
-
-      {/* Empty space for album image */}
+        
       <div className="header-image">
         Songs/Album
       </div>
