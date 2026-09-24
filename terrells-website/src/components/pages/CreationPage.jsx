@@ -1,10 +1,6 @@
 import { useState } from "react";
-import beats from "../../beats.js";
-import MusicBlock from "../music/MusicBlock.jsx";
 
-export default function CreationPage() {
-
-  const [beatList, setBeatList] = useState(beats);
+export default function CreationPage({ beatList, setBeatList }) {
 
   const [title, setTitle] = useState("");
   const [bpm, setBpm] = useState("");

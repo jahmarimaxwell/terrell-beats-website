@@ -2,7 +2,7 @@ import beats from "../../beats";
 import MusicBlock from "../music/MusicBlock";
 import MusicHeader from "../header/MusicHeader";
 
-export default function mainPage() {
+export default function mainPage({ beatList }) {
     return (
     <>
       <img className="cover" src="assets/TrellSettaz.png"></img>
@@ -38,13 +38,13 @@ export default function mainPage() {
         </div>
       </div>
 
-      <MusicHeader></MusicHeader>
+      <MusicHeader/>
       <div className="music-display">
-            {beats.map((beat) => (
-              <MusicBlock
-                key={beat.title}
-                beat={beat}
-              />
+        {beatList.map((beat) => (
+          <MusicBlock
+            key={beat.title}
+            beat={beat}
+          />
             ))}
       </div>
     </>
