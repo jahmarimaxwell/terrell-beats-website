@@ -16,39 +16,54 @@ export default function CreationPage({ beatList, setBeatList }) {
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const convertAudioToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
 
-    if (!audioFile) {
-      alert("Please select an audio file.");
-      return;
-    }
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+
+    reader.onerror = (error) => {
+      reject(error);
+    };
+
+  });
+};
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
     const audioURL = URL.createObjectURL(audioFile);
 
     const newBeat = {
-      title: title,
-      time: "00:00",
-      bpm: bpm,
-      tags: tags.split(",").map((tag) => tag.trim()),
-      price: `$${price}`,
-      image: "",
-      audio: audioURL
+        title: title,
+        bpm: Number(bpm),
+        price: Number(price),
+        tags: tags.split(",").map((tag) => tag.trim()),
+        audio_url: audioURL
     };
 
-    setBeatList((currentBeats) => [
-      ...currentBeats,
-      newBeat
-    ]);
+    try {
+        const response = await fetch("http://localhost:3000/api/beats", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newBeat)
+        });
 
-    setTitle("");
-    setBpm("");
-    setPrice("");
-    setTags("");
-    setAudioFile(null);
+        const savedBeat = await response.json();
 
-    event.target.reset();
-  };
+        console.log("Saved beat:", savedBeat);
+
+    } catch (error) {
+        console.error("Error saving beat:", error);
+    }
+};
 
   return (
     <div className="creation-container">

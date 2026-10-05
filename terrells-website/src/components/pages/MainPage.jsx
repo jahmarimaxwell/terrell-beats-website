@@ -1,8 +1,22 @@
-import beats from "../../beats";
+import { useState, useEffect } from "react";
 import MusicBlock from "../music/MusicBlock";
 import MusicHeader from "../header/MusicHeader";
 
-export default function mainPage({ beatList }) {
+export default function mainPage() {
+
+   const [beatList, setBeatList] = useState([]);
+
+    useEffect(() => {
+        fetch("http://localhost:3000/api/beats")
+            .then((response) => response.json())
+            .then((data) => {
+                setBeatList(data);
+            })
+            .catch((error) => {
+                console.error("Error fetching beats:", error);
+            });
+    }, []);
+
     return (
     <>
       <img className="cover" src="assets/TrellSettaz.png"></img>

@@ -12,7 +12,33 @@ import beats from "./beats";
 
 function App() {
 
-  const [beatList, setBeatList] = useState(beats);
+   const [beatList, setBeatList] = useState(() => {
+    const savedBeats = localStorage.getItem("beats");
+
+    if (savedBeats) {
+      return JSON.parse(savedBeats);
+    }
+
+    return beats;
+  });
+
+  const updateBeatList = (update) => {
+  setBeatList((currentBeats) => {
+
+    const newBeatList =
+      typeof update === "function"
+        ? update(currentBeats)
+        : update;
+
+    localStorage.setItem(
+      "beats",
+      JSON.stringify(newBeatList)
+    );
+
+    return newBeatList;
+  });
+};
+
 
   return (
     <>
@@ -20,7 +46,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage beatList={beatList} />} />
-          <Route path="/creationPage" element={<CreationPage beatList={beatList} setBeatList={setBeatList} />} />
+          <Route path="/creationPage" element={<CreationPage beatList={updateBeatList} setBeatList={setBeatList} />} />
         </Routes>
       </HashRouter>
     </>
