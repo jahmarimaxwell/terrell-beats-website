@@ -200,7 +200,8 @@ body {
 }
 
 .sign-in {
-   background-color: #006EFF;
+  /* color: white; */
+  background-color: black;
 }
 
 /* Creating the horizontal line */
@@ -401,6 +402,7 @@ hr {
 }
 
 /* /////// Creation Page /////// */
+
 .creation-container {
   /* Make height same as screen size */
   height: 100dvh;
@@ -423,4 +425,77 @@ hr {
   padding: 20px;
   height: 40px;
   border-radius: 20px;
+}
+
+/* //////// Sign In Page /////// */
+
+.signin-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background: #080a19;
+  color: #fff;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 420px;
+  padding: 32px;
+  border: 1px solid #303956;
+  border-radius: 12px;
+  background: #171c32;
+}
+
+.signin-form h1 {
+  margin: 0;
+  text-align: center;
+}
+
+.signin-form > p {
+  text-align: center;
+  color: #b8bfd4;
+}
+
+.signin-form label {
+  font-weight: 600;
+}
+
+.signin-form input {
+  padding: 12px;
+  border: 1px solid #454d6c;
+  border-radius: 6px;
+  background: #080a19;
+  color: white;
+  font: inherit;
+}
+
+.signin-form button {
+  margin-top: 8px;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #087bff;
+  color: white;
+  font: inherit;
+  cursor: pointer;
+}
+
+.signin-form button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.signin-form a {
+  margin-top: 8px;
+  text-align: center;
+  color: #1685ff;
+}
+
+.signin-form .signin-error {
+  color: #ff8585;
 }

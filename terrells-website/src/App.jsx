@@ -4,10 +4,9 @@ import "./App.css";
 {/* importing mainPage */}
 import Header from './components/header/Header';
 import MainPage from './components/pages/MainPage';
-// import './index.css'
-import './App.css'
 import CreationPage from "./components/pages/CreationPage";
-
+import SignInPage from "./components/pages/SignInPage";
+// import './index.css'
 import beats from "./beats";
 
 function App() {
@@ -47,6 +46,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage beatList={beatList} />} />
           <Route path="/creationPage" element={<CreationPage beatList={updateBeatList} setBeatList={setBeatList} />} />
+          <Route path="/signInPage" element={<SignInPage />} />
         </Routes>
       </HashRouter>
     </>

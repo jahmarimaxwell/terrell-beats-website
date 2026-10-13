@@ -20,7 +20,7 @@ app.get("/api/beats", async (req, res) => {
   }
 });
 
-app.post("/api/beats", async (req, res) => {
+app.post("/api/beats", requireAdmin, async (req, res) => {
   try {
     const { title, bpm, price, tags, audio_url } = req.body;
 
