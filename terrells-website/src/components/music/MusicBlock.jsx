@@ -16,7 +16,6 @@ export default function MusicBlock({ beat }) {
 
   return (
     <div className="music-block-container">
-      {/* <hr></hr> */}
         <div className="music-view">
           
           <img
