@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import session from "express-session";
 import pool from "./db.js";
+import bcrypt from "bcrypt";
 import requireAdmin from "./middleware/requireAdmin.js";
 
 dotenv.config({
@@ -39,6 +40,82 @@ app.use(
     },
   })
 );
+
+
+app.post("/api/auth/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (typeof email !== "string" ||
+        typeof password !== "string") {
+      return res.status(400).json({
+        error: "Email and password are required."
+      });
+    }
+
+    const result = await pool.query(
+      "SELECT * FROM users WHERE email = $1",
+      [email]
+    );
+
+    const user = result.rows[0];
+
+    if (!user) {
+      return res.status(401).json({
+        error: "Invalid email or password."
+      });
+    }
+
+    const validPassword = await bcrypt.compare(
+      password,
+      user.password_hash
+    );
+
+    if (!validPassword) {
+      return res.status(401).json({
+        error: "Invalid email or password."
+      });
+    }
+
+    // Create a fresh session after successful login.
+    req.session.regenerate((error) => {
+      if (error) {
+        console.error(error);
+        return res.status(500).json({
+          error: "Unable to create session."
+        });
+      }
+
+      req.session.userId = user.id;
+      req.session.role = user.role;
+
+      req.session.save((error) => {
+        if (error) {
+          console.error(error);
+          return res.status(500).json({
+            error: "Unable to save session."
+          });
+        }
+
+        res.json({
+          message: "Login successful",
+          user: {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            role: user.role
+          }
+        });
+      });
+    });
+  } catch (error) {
+    console.error("Login error:", error);
+
+    res.status(500).json({
+      error: "Login failed."
+    });
+  }
+});
 
 
 app.get("/api/beats", async (req, res) => {
