@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ export default function SignInPage() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const { refreshUser } = useAuth();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -33,6 +35,8 @@ export default function SignInPage() {
       if (!response.ok) {
         throw new Error(data.error || "Unable to sign in.");
       }
+
+      await refreshUser();
 
       // Send admins and regular users to different pages.
       if (data.user.role === "admin") {

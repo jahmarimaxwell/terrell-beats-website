@@ -118,6 +118,53 @@ app.post("/api/auth/login", async (req, res) => {
 });
 
 
+app.get("/api/auth/me", async (req, res) => {
+  if (!req.session?.userId) {
+    return res.json({ user: null });
+  }
+
+  try {
+    const result = await pool.query(
+      `SELECT id, username, email, role
+       FROM users
+       WHERE id = $1`,
+      [req.session.userId]
+    );
+
+    const user = result.rows[0] || null;
+
+    res.json({ user });
+  } catch (error) {
+    console.error("Authentication check failed:", error);
+    res.status(500).json({
+      error: "Failed to check authentication"
+    });
+  }
+});
+
+app.post("/api/auth/logout", (req, res) => {
+  if (!req.session) {
+    return res.json({ message: "Signed out" });
+  }
+
+  req.session.destroy((error) => {
+    if (error) {
+      console.error("Logout failed:", error);
+      return res.status(500).json({
+        error: "Failed to sign out"
+      });
+    }
+
+    res.clearCookie("connect.sid", {
+      path: "/",
+      sameSite: "lax",
+      secure: false
+    });
+
+    res.json({ message: "Signed out successfully" });
+  });
+});
+
 app.get("/api/beats", async (req, res) => {
   try {
     const result = await pool.query(

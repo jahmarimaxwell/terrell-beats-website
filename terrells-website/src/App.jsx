@@ -9,6 +9,10 @@ import SignInPage from "./components/pages/SignInPage";
 // import './index.css'
 import beats from "./beats";
 
+import { AuthProvider } from "./components/context/AuthContext";
+import AdminRoute from "./components/AdminRoute";
+
+
 function App() {
 
    const [beatList, setBeatList] = useState(() => {
@@ -42,12 +46,16 @@ function App() {
   return (
     <>
       <HashRouter> {/* So that the homepage is "MainPage" */}
-        <Header />
-        <Routes>
-          <Route path="/" element={<MainPage beatList={beatList} />} />
-          <Route path="/creationPage" element={<CreationPage beatList={updateBeatList} setBeatList={setBeatList} />} />
-          <Route path="/signInPage" element={<SignInPage />} />
-        </Routes>
+        <AuthProvider>
+          <Header />
+          <Routes>
+            <Route path="/" element={<MainPage beatList={beatList} />} />
+            <Route element={<AdminRoute />}>
+              <Route path="/creationPage" element={<CreationPage beatList={updateBeatList} setBeatList={setBeatList} />} />
+            </Route>
+            <Route path="/signIn" element={<SignInPage />} />
+          </Routes>
+        </AuthProvider>
       </HashRouter>
     </>
   )

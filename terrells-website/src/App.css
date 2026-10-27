@@ -199,6 +199,10 @@ body {
  margin: 20px;
 }
 
+.welcome-text {
+  margin: 20px;
+}
+
 .sign-in {
   /* color: white; */
   background-color: black;
