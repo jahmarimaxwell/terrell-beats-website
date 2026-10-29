@@ -1,27 +1,72 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function MusicBlock({ beat }) {
-  const [audio] = useState(() => new Audio(beat.audio));
+  const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const togglePlayback = () => {
-    if (isPlaying) {
+  // Get audio file from PostgreSQL
+  const audioSource = beat.audio_file || beat.audio;
+
+  useEffect(() => {
+    if (!audioSource) {
+      audioRef.current = null;
+      setIsPlaying(false);
+      return;
+    }
+
+    const audio = new Audio(audioSource);
+    audioRef.current = audio;
+
+    const handleEnded = () => {
+      setIsPlaying(false);
+    };
+
+    const handleError = () => {
+      console.error("Unable to load audio:", audioSource);
+      setIsPlaying(false);
+    };
+
+    audio.addEventListener("ended", handleEnded);
+    audio.addEventListener("error", handleError);
+
+    return () => {
+      audio.pause();
+      audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener("error", handleError);
+      audio.removeAttribute("src");
+      audio.load();
+
+      if (audioRef.current === audio) {
+        audioRef.current = null;
+      }
+    };
+  }, [audioSource]);
+
+  const togglePlayback = async () => {
+    const audio = audioRef.current;
+
+    if (!audio) {
+      console.error("No audio file found for:", beat.title);
+      return;
+    }
+
+    if (!audio.paused) {
       audio.pause();
       setIsPlaying(false);
     } else {
-      audio.play();
-      setIsPlaying(true);
+      try {
+        await audio.play();
+        setIsPlaying(true);
+      } catch (error) {
+        console.error("Error playing audio:", error);
+        setIsPlaying(false);
+      }
     }
   };
 
   return (
     <div className="music-block-container">
         <div className="music-view">
-          
-          <img
-            className="album-icon"
-            src={beat.image}
-          />
 
           <div className="beat-title">
             <h3>{beat.title}</h3>
@@ -34,12 +79,6 @@ export default function MusicBlock({ beat }) {
           <div className="beat-bpm">
             {beat.bpm}
           </div>
-
-          {/* <div className="beat-tags">
-            {beat.tags.map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
-          </div> */}
 
           <div className="beat-actions">
             <button type="button">↓</button>

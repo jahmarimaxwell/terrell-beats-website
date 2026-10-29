@@ -1,11 +1,7 @@
 export default function MusicHeader() {
   return (
     <div className="music-header">
-        
-      <div className="header-image">
-        Songs/Album
-      </div>
-
+      
       <div className="header-title">
         Track
       </div>

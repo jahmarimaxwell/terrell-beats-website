@@ -6,6 +6,12 @@ import pool from "./db.js";
 import bcrypt from "bcrypt";
 import requireAdmin from "./middleware/requireAdmin.js";
 
+import multer from "multer";
+import path from "path";
+import { fileURLToPath } from "url";
+import fs from "fs";
+import crypto from "crypto";
+
 dotenv.config({
   path: new URL("../.env", import.meta.url),
 });
@@ -14,7 +20,57 @@ if (!process.env.SESSION_SECRET) {
   throw new Error("SESSION_SECRET is missing from .env");
 }
 
+// ======================================
+// MULTER CONFIGURATION - PUT CODE HERE
+// ======================================
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const uploadDirectory = path.join(__dirname, "uploads");
+
+// Create uploads folder if it doesn't exist
+fs.mkdirSync(uploadDirectory, { recursive: true });
+
+// Configure where uploaded files are saved
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, uploadDirectory);
+  },
+
+  filename: (req, file, cb) => {
+    const filename =
+      `${Date.now()}-${crypto.randomUUID()}${path.extname(file.originalname).toLowerCase()}`;
+
+    cb(null, filename);
+  }
+});
+
+// Configure allowed audio uploads
+const upload = multer({
+  storage,
+
+  limits: {
+    fileSize: 30 * 1024 * 1024
+  },
+
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype !== "audio/mpeg") {
+      return cb(new Error("Only MP3 files are allowed"));
+    }
+
+    cb(null, true);
+  }
+});
+
+// ======================================
+// EXPRESS APP STARTS HERE
+// ======================================
+
 const app = express();
+
+// Make uploaded audio files accessible
+app.use("/uploads", express.static(uploadDirectory));
 
 // 1. Configure CORS
 app.use(
@@ -40,7 +96,6 @@ app.use(
     },
   })
 );
-
 
 app.post("/api/auth/login", async (req, res) => {
   try {
@@ -178,16 +233,17 @@ app.get("/api/beats", async (req, res) => {
   }
 });
 
-app.post("/api/beats", requireAdmin, async (req, res) => {
+app.post("/api/beats", requireAdmin, upload.single("audio_file"), async (req, res) => {
+  
   try {
-    const { title, bpm, price, tags, time, audio_url } = req.body;
+    const { title, bpm, price, time, audio_file } = req.body;
 
     const result = await pool.query(
       `INSERT INTO beats
-       (title, bpm, price, tags, time, audio_url)
-       VALUES ($1, $2, $3, $4, $5, $6)
+       (title, bpm, price, time, audio_file)
+       VALUES ($1, $2, $3, $4, $5)
        RETURNING *`,
-      [title, bpm, price, tags, time, audio_url]
+      [title, bpm, price, time, audio_file]
     );
 
     res.status(201).json(result.rows[0]);

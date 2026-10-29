@@ -61,37 +61,49 @@ const handleAudioChange = (event) => {
   });
 };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const audioURL = URL.createObjectURL(audioFile);
+  if (!audioFile) {
+    alert("Please select an audio file.");
+    return;
+  }
 
-    const newBeat = {
-        title: title,
+  // Temporary audio URL
+  const audioURL = URL.createObjectURL(audioFile);
+
+  try {
+    // Save beat to PostgreSQL through Express
+    const response = await fetch("http://localhost:3000/api/beats", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        title,
+        time,
         bpm: Number(bpm),
         price: Number(price),
-        // tags: tags.split(",").map((tag) => tag.trim()),
-        time: time,
-        audio_url: audioURL
-    };
+        audio_file: audioURL
+      })
+    });
 
-    try {
-        const response = await fetch("http://localhost:3000/api/beats", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            credentials: "include",
-            body: JSON.stringify(newBeat)
-        });
+    const data = await response.json();
 
-        const savedBeat = await response.json();
-
-        console.log("Saved beat:", savedBeat);
-
-    } catch (error) {
-        console.error("Error saving beat:", error);
+    if (!response.ok) {
+      console.error("Failed to save beat:", data);
+      return;
     }
+
+    console.log("Saved beat:", data);
+
+    alert("Beat saved successfully!");
+
+  } catch (error) {
+    console.error("Error saving beat:", error);
+  }
 };
 
   return (
