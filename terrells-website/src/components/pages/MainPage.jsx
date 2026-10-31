@@ -22,7 +22,7 @@ export default function mainPage() {
       <img className="cover" src="assets/TrellSettaz.png"></img>
 
       <div className="information-container">
-        <h1 className="info-title">Why Choose TrendSettaz?</h1>
+        <h1 className="info-title">Vibe to TrellSettaz Beats</h1>
         <h3 className="information">
           The ultimate platform for music creators 
           and buyers to connect and transact seamlessly.</h3>
@@ -31,25 +31,20 @@ export default function mainPage() {
       <div className="purpose-container">
 
         <div className="purpose">
-          <h3 className="purpose-title">Upload & Sell</h3>
-          <p className="purpose-info">
-            Upload your beats, instrumentals, and samples. 
-            Set your own prices and licensing terms.</p>
+          <div className="music-wave">
+              {Array.from({ length: 80 }, (_, index) => (
+                <span
+                  key={index}
+                  style={{
+                    "--i": index,
+                    "--duration": `${0.6 + (index % 7) * 0.15}s`,
+                    "--height": `${25 + Math.abs(Math.sin(index * 0.35)) * 75}%`
+                  }}
+                ></span>
+              ))}
+          </div>
         </div>
 
-        <div className="purpose">
-          <h3 className="purpose-title">Preview & Buy</h3>
-          <p className="purpose-info">
-            Browse thousands of tracks with instant preview. 
-            Buy and download immediately with proper licensing.</p>
-        </div>
-
-        <div className="purpose">
-          <h3 className="purpose-title">Track Success</h3>
-          <p className="purpose-info">
-            Monitor your earnings, track performance, 
-            and grow your music business with detailed analytics.</p>
-        </div>
       </div>
 
       <MusicHeader/>

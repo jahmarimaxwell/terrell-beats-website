@@ -113,49 +113,49 @@ const handleSubmit = async (e) => {
 
       <h2 className="add-beat-title"> Add a Beat </h2>
 
-      <label> Beat Name </label>
+      <label className="input-title"> Beat Name </label>
 
       <input
-        className="property"
+        className="input-field"
         type="text"
         value={title}
         onChange={(event) => setTitle(event.target.value)}
         required
       />
 
-      <label> Audio File </label>
+      <label className="input-title"> Audio File </label>
 
       <input
-        className="property"
+        className="input-field"
         type="file"
         accept="audio/*"
         onChange={handleAudioChange}
         required
       />
 
-      <label> BPM </label>
+      <label className="input-title"> BPM </label>
 
       <input
-        className="property"
+        className="input-field"
         type="number"
         value={bpm}
         onChange={(event) => setBpm(event.target.value)}
         required
       />
 
-      <label> Time </label>
+      <label className="input-title"> Time </label>
 
       <input  
-        className="property"
+        className="input-field"
         type="text"
         value={time}
         readOnly
       />
 
-      <label> Price </label>
+      <label className="input-title"> Price </label>
 
       <input
-        className="property"
+        className="input-field"
         type="number"
         step="0.01"
         value={price}
@@ -163,7 +163,7 @@ const handleSubmit = async (e) => {
         required
       />
 
-      <button type="submit">
+      <button className="add-beat-button" type="submit">
         Add Beat
       </button>
 

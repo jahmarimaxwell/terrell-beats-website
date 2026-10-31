@@ -43,26 +43,23 @@ export default function MusicBlock({ beat }) {
   }, [audioSource]);
 
   const togglePlayback = async () => {
-    const audio = audioRef.current;
+  const audio = audioRef.current;
 
-    if (!audio) {
-      console.error("No audio file found for:", beat.title);
-      return;
-    }
+  if (!audio) return;
 
-    if (!audio.paused) {
-      audio.pause();
+  if (!audio.paused) {
+    audio.pause();
+    setIsPlaying(false);
+  } else {
+    try {
+      await audio.play();
+      setIsPlaying(true);
+    } catch (error) {
+      console.error("Error playing audio:", error);
       setIsPlaying(false);
-    } else {
-      try {
-        await audio.play();
-        setIsPlaying(true);
-      } catch (error) {
-        console.error("Error playing audio:", error);
-        setIsPlaying(false);
-      }
     }
-  };
+  }
+};
 
   return (
     <div className="music-block-container">
@@ -93,14 +90,13 @@ export default function MusicBlock({ beat }) {
 
           <div className="button-and-stream">
 
-            <div className="audio-wave">
+            <div className={`audio-wave ${isPlaying ? "playing" : ""}`}>
               <span></span>
               <span></span>
               <span></span>
               <span></span>
               <span></span>
             </div>
-
             <button
               type="button"
               onClick={togglePlayback}
